@@ -7,13 +7,13 @@ c) test the hypothesis that the mean equals 100.
 d) use wilcox test to test the hypothesis that mean equals 90.
 
 Solution:
-sdata <- rnorm(n = 100, mean = 100, sd = 5)
-hist(sdata, breaks = 100, main = "Histogram")
-plot(density(sdata), main = "Density Plot")
-boxplot(sdata, main = "Box Plot")
-plot(sdata, main = "Scatter Plot")
-t.test(sdata, mu = 100)
-wilcox.test(sdata, mu = 90, alternative = "two.sided")
+--sdata <- rnorm(n = 100, mean = 100, sd = 5)        
+--hist(sdata, breaks = 100, main = "Histogram")         
+--plot(density(sdata), main = "Density Plot")   
+--boxplot(sdata, main = "Box Plot")     
+--plot(sdata, main = "Scatter Plot")    
+--t.test(sdata, mu = 100)       
+--wilcox.test(sdata, mu = 90, alternative = "two.sided")        
 ------------------------------------------------------------------------------------ 
 Q 2) Using the Algae data set from package DMwR to complete the following tasks.
 a) create a graph that you find adequate to show the distribution of the values of algae a6.
@@ -26,42 +26,33 @@ g) visualize the relationship between the frequencies of algae a1 and a6. Give t
 h) appropriate graph title, x-axis and y-axis title. 
 
 Solution:
-#a)
-library(DMwR)
-# Load the Algae dataset
+--a)library(DMwR)
+#Load the Algae dataset#
 data(algae)
-
-# Plot the distribution of algae a6
+# Plot the distribution of algae a6#
 hist(algae$a6, main = "Distribution of Algae a6", xlab = "Algae a6 Values", ylab = "Frequency")
 
-
-# b) Plot the distribution of size 3
+--b)#Plot the distribution of size 3#
 hist(algae$size3, main = "Distribution of Size 3", xlab = "Size 3 Values", ylab = "Frequency")
 
-
-
-# c) Plot a histogram and a normal distribution curve
+--c)#Plot a histogram and a normal distribution curve#
 hist(algae$oPO4, main = "Distribution of oPO4", xlab = "oPO4 Values", ylab = "Frequency", prob = TRUE)
 curve(dnorm(x, mean = mean(algae$oPO4), sd = sd(algae$oPO4)), add = TRUE, col = "blue")
 
-#d)
-# Install and load the 'ggplot2' package for more advanced plotting
+--d)#Install and load the 'ggplot2' package for more advanced plotting#
 install.packages("ggplot2")
 library(ggplot2)
-
-# Create a scatter plot to visualize the relationship between NO3 and size1
+# Create a scatter plot to visualize the relationship between NO3 and size1#
 ggplot(algae, aes(x = size1, y = NO3)) + geom_point() + labs(title = "Distribution of NO3 across River Sizes", x = "River Size", y = "NO3 Values")
 
-
-# e) Create a boxplot to compare the distribution of a1 across speed categories
+--e)#Create a boxplot to compare the distribution of a1 across speed categories#
 ggplot(algae, aes(x = speed, y = a1)) + geom_boxplot() + labs(title = "Distribution of Algae a1 across River Speeds", x = "River Speed", y = "Algae a1 Values")
 
 
-# f) Compute the frequencies of algae a1 and a6
+--f)#Compute the frequencies of algae a1 and a6#
 a1_freq <- table(algae$a1)
 a6_freq <- table(algae$a6)
-
-# Create a bar plot to visualize the frequencies
+# Create a bar plot to visualize the frequencies#
 barplot(rbind(a1_freq, a6_freq), beside = TRUE, legend.text = c("Algae a1", "Algae a6"),
         main = "Frequency Relationship between Algae a1 and a6", xlab = "Algae", ylab = "Frequency")  
         
@@ -73,26 +64,21 @@ c) make a scatter plot of biomass versus height, with the symbol colour varying 
 d) log-transform biomass, and redraw the plot.
 
 Solution:
-#a)
-# Read the CSV file
+--a)# Read the CSV file#
 data <- read.csv("Coweeta.CSV")
-
-# Count the number of observations per species
+# Count the number of observations per species#
 species_count <- table(data$species)
 species_count
 
-# b) Filter the data to include species with at least 10 observations
+--b)# Filter the data to include species with at least 10 observations#
 filtered_data <- subset(data, species_count[species] >= 10)
 
-#c) Make a scatter plot of biomass versus height
-
+--c)# Make a scatter plot of biomass versus height#
 plot(filtered_data$height, filtered_data$biomass, pch = 15, col = filtered_data$species,
      xlab = "Height", ylab = "Biomass", main = expression(italic("Scatter Plot of Biomass vs Height")))
 
-#d) 
-# Log-transform biomass
+--d) #Log-transform biomass#
 filtered_data$log_biomass <- log(filtered_data$biomass)
-
 # Redraw the scatter plot with log-transformed biomass
 plot(filtered_data$height, filtered_data$log_biomass, pch = 15, col = filtered_data$species,
      xlab = "Height", ylab = "Log-transformed Biomass", main = expression(italic("Scatter Plot of Log-transformed Biomass vs Height")))
@@ -127,28 +113,28 @@ e) relationship between fibre and manufacturer
 f) relationship between sodium and sugars
 
 Solution:
-# Load the MASS library and the UScereal dataset
+--# Load the MASS library and the UScereal dataset
 library(MASS)
 data(UScereal)
 
-# Create a plot of shelf vs. manufacturer
+--# Create a plot of shelf vs. manufacturer
 plot(UScereal$mfr, UScereal$shelf, xlab = "Manufacturer", ylab = "Shelf")
 
-# Create a plot of fat vs. vitamins
+--# Create a plot of fat vs. vitamins
 plot(UScereal$vitamins, UScereal$fat,
         xlab = "Vitamins", ylab = "Fats")
 
-# Create a boxplot of fat vs. shelf
+--# Create a boxplot of fat vs. shelf
 boxplot(UScereal$fat, UScereal$shelf, xlab = "Shelf", ylab = "Fat")
 
-# Create a scatterplot of carbohydrates vs. sugars
+--# Create a scatterplot of carbohydrates vs. sugars
 plot(UScereal$carbo, UScereal$sugars, xlab = "Carbohydrates", ylab = "Sugars")
 
-# Create a stacked barplot of fibre vs. manufacturer
+--# Create a stacked barplot of fibre vs. manufacturer
 barplot(t(as.matrix(table(UScereal$fibre, UScereal$mfr))), col = rainbow(8), 
         xlab = "Fiber", ylab = "Count")
 
-# Create a scatterplot of sodium vs. sugars
+--# Create a scatterplot of sodium vs. sugars
 plot(UScereal$sodium, UScereal$sugars, xlab = "Sodium", ylab = "Sugars") 
 
 --------------------------------------------------------------------------------------------------------
@@ -168,18 +154,16 @@ sim2 <- rbinom(n = 1, size = 100, prob = 0.5)
 print(paste("Simulation 1: ", sim1))
 print(paste("Simulation 2: ", sim2))
 
-b) The results will differ each time the code is run. This is because the simulation is random, and the binomial distribution is a discrete distribution, so the values can only take on integer values between 0 and n. The two simulations will have a similar shape, but the exact values will differ.
+--b) The results will differ each time the code is run. This is because the simulation is random, and the binomial distribution is a discrete distribution, so the values can only take on integer values between 0 and n. The two simulations will have a similar shape, but the exact values will differ.
 
-c)
+--c)
 set.seed(1)
 p <- rnorm(n = 10, mean = 10, sd = 10)
 set.seed(0)
 q <- rnorm(n = 10, mean = 100, sd = 100)
-
 print(paste("Simulation 1: ", p))
 print(paste("Simulation 2: ", q))
 
+--d) The two simulations will differ in their mean and standard deviation. The first simulation has a mean of 10 and a standard deviation of 10, while the second simulation has a mean of 100 and a standard deviation of 100. However, both simulations will be similar in their shape since they are both normal distributions.
 
-d) The two simulations will differ in their mean and standard deviation. The first simulation has a mean of 10 and a standard deviation of 10, while the second simulation has a mean of 100 and a standard deviation of 100. However, both simulations will be similar in their shape since they are both normal distributions.
-
-e) Both simulations are approximately normal, as the central limit theorem states that the sum of many independent, identically distributed random variables will be approximately normal. In this case, each simulation is the sum of 10 independent, identically distributed random variables, so they will both be approximately normal.
+--e) Both simulations are approximately normal, as the central limit theorem states that the sum of many independent, identically distributed random variables will be approximately normal. In this case, each simulation is the sum of 10 independent, identically distributed random variables, so they will both be approximately normal.
